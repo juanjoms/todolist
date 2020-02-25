@@ -1,0 +1,10 @@
+label {
+  width: 70%;
+  display: inline-block;
+  &.completed {
+    text-decoration: line-through;
+    font-style: italic;
+    color: #999;
+  }
+}
+

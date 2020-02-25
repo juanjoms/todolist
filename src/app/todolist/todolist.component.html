@@ -1,0 +1,23 @@
+<form class="todolist">
+  <input type="text" [(ngModel)]="newTask.description" name="description" autocomplete="off" placeholder="Task">
+  <input type="date" [(ngModel)]="newTask.dueDate" name="date">
+  <button (click)="addTask()">Add task</button>
+</form>
+<ul>
+  <li *ngFor="let task of todoList; let i = index">
+    <label [class.completed]="task.isDone">
+      <input type="checkbox" [(ngModel)]="task.isDone">
+      {{task.description}} <sub>{{task.dueDate}}</sub>
+    </label>
+    <button (click)="editTask(task)"> Edit </button>
+    <button (click)="deleteTask(task)"> Delete </button>
+  </li>
+</ul>
+
+<div *ngIf="isEditOpen">
+  <h3>Edit task</h3>
+  <input type="text" [(ngModel)]="editedTask.description" name="edit-desc">
+  <input type="date" [(ngModel)]="editedTask.dueDate" name="edit-date">
+  <button (click)="cancelEdit()">Cancel</button>
+  <button (click)="closeEdit()">Done</button>
+</div>
