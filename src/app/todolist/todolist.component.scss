@@ -1,10 +1,33 @@
-label {
-  width: 70%;
-  display: inline-block;
-  &.completed {
-    text-decoration: line-through;
-    font-style: italic;
-    color: #999;
+.todolist {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  .task-description {
+    width: 45%;
+  }
+  .task-due-date {
+    width: 25%;
+  }
+  .mat-flat-button {
+    height: 36px;
   }
 }
+
+ul {
+  list-style: none;
+  padding: 0;
+  li {
+    display: flex;
+    align-items: center;
+    .mat-checkbox {
+      width: 100%;
+      &.completed {
+        text-decoration: line-through;
+        font-style: italic;
+        color: #999;
+      }
+    }
+  }
+}
+
 

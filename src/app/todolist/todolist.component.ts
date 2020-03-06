@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
+import { MatDialog } from '@angular/material/dialog';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 @Component({
   selector: 'app-todolist',
@@ -10,9 +12,12 @@ export class TodolistComponent implements OnInit {
 
   todoList: Todo[];
   newTask: Todo;
-  isEditOpen: boolean;
   originalTask: Todo;
   editedTask: Todo;
+
+  constructor(public dialog: MatDialog) {
+
+  }
 
   ngOnInit() {
     this.todoList = this.getTodoList() || [];
@@ -38,17 +43,20 @@ export class TodolistComponent implements OnInit {
   editTask(task: Todo) {
     this.originalTask = {...task};
     this.editedTask = task;
-    this.isEditOpen = true;
+
+    const dialogRef = this.dialog.open(EditTaskComponent, {
+      width: '250px',
+      data: this.editedTask
+    });
+
+    dialogRef.afterClosed().subscribe((task: Todo) => {
+      if (!task) {
+        this.editedTask.description = this.originalTask.description;
+        this.editedTask.dueDate = this.originalTask.dueDate;
+      }
+    });
   }
 
-  cancelEdit() {
-    this.editedTask.description = this.originalTask.description;
-    this.editedTask.dueDate = this.originalTask.dueDate;
-    this.isEditOpen = false;
-  }
-  closeEdit() {
-    this.isEditOpen = false;
-  }
 
   saveTodoList() {
     localStorage.setItem('todolist', JSON.stringify(this.todoList));

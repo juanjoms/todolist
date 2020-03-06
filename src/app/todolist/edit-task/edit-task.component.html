@@ -1,0 +1,18 @@
+<div>
+  <h3>Edit task</h3>
+
+  <mat-form-field>
+    <mat-label>Task</mat-label>
+    <input matInput [(ngModel)]="task.description" name="edit-desc">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Due Date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="task.dueDate" name="date" >
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-flat-button (click)="closeModal()">Cancel</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="task" >Done</button>
+</div>

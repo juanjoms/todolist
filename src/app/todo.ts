@@ -4,4 +4,3 @@ export class Todo {
   isDone: boolean;
 }
 
-export type Task = Todo;
